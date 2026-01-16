@@ -166,3 +166,17 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing Next.js useSearchParams or useRouter for state management
     - When troubleshooting dashboard search or filter functionality
     - When enhancing user experience with visual filter feedback
+
+- app_docs/feature-91018a17-responsive-navigation-layout.md
+  - Conditions:
+    - When working with navigation components or layout structure
+    - When implementing responsive design for mobile and desktop views
+    - When building hamburger menus or mobile navigation drawers
+    - When creating user profile dropdowns or menu components
+    - When implementing click-outside detection or menu interactions
+    - When working with footer components across the application
+    - When adding keyboard navigation support (Escape key handling)
+    - When implementing ARIA labels for accessibility in navigation
+    - When troubleshooting mobile menu animations or transitions
+    - When working with authentication-aware navigation links
+    - When using useClickOutside hook for menu functionality
