@@ -153,3 +153,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When creating reusable card components with optional interactivity
     - When working with Next.js Image component error handling
     - When implementing responsive card layouts for user profiles
+
+- app_docs/feature-20baf7ca-dashboard-search-filter.md
+  - Conditions:
+    - When implementing search debouncing or optimizing search performance
+    - When adding clear buttons or reset functionality to search inputs
+    - When creating active filters indicators or filter chip components
+    - When implementing URL query parameter synchronization for shareable views
+    - When working with the SearchBar component enhancements
+    - When building filter removal or clear all functionality
+    - When using the use-debounce library in React components
+    - When implementing Next.js useSearchParams or useRouter for state management
+    - When troubleshooting dashboard search or filter functionality
+    - When enhancing user experience with visual filter feedback
