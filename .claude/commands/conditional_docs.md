@@ -196,3 +196,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When adding exponential backoff retry mechanisms
     - When working with error categorization (network, auth, validation errors)
     - When enhancing user experience with visual feedback during async operations
+
+- app_docs/chore-7fb918fe-comprehensive-documentation.md
+  - Conditions:
+    - When creating or updating project documentation (README, guides, or architecture docs)
+    - When preparing the application for deployment to Vercel
+    - When documenting the ADW (AI Developer Workflow) system or agentic AI development process
+    - When writing feature documentation or updating documentation standards
+    - When troubleshooting Vercel deployment or configuration issues
+    - When understanding the project structure and documentation organization
+    - When documenting mock credentials or test data for the application
+    - When explaining autonomous AI development patterns and agent decision-making
+    - When working with ARCHITECTURE.md or DEPLOYMENT.md files
+    - When preparing documentation for challenge submissions or showcases
