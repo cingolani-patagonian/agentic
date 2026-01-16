@@ -3,6 +3,9 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { ToastProvider } from '@/contexts/ToastContext'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { OfflineBanner } from '@/components/OfflineBanner'
 
 export const metadata: Metadata = {
   title: 'Mock User Dashboard',
@@ -17,13 +20,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
-        <AuthProvider>
-          <Navigation />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </AuthProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <ErrorBoundary>
+              <OfflineBanner />
+              <Navigation />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </ErrorBoundary>
+          </AuthProvider>
+        </ToastProvider>
       </body>
     </html>
   )

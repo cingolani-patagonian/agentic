@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useDebounce } from 'use-debounce'
 import { useAuth } from '@/hooks/useAuth'
+import { useToast } from '@/hooks/useToast'
 import { getAllUsers } from '@/lib/api'
 import { User } from '@/types'
 import UserCard from '@/components/UserCard'
@@ -13,11 +14,13 @@ import ActiveFilters from '@/components/ActiveFilters'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import EmptyState from '@/components/EmptyState'
 import ErrorState from '@/components/ErrorState'
+import { SkeletonLoader } from '@/components/SkeletonLoader'
 
 function DashboardContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, logout, isLoading } = useAuth()
+  const { showError, showSuccess } = useToast()
 
   // User data state
   const [users, setUsers] = useState<User[]>([])
@@ -51,10 +54,14 @@ function DashboardContent() {
           setUsers(response.data)
           setFilteredUsers(response.data)
         } else {
-          setError(response.error || 'Failed to load users')
+          const errorMsg = response.error || 'Failed to load users'
+          setError(errorMsg)
+          showError(errorMsg)
         }
       } catch (err) {
-        setError('An unexpected error occurred while loading users')
+        const errorMsg = 'An unexpected error occurred while loading users'
+        setError(errorMsg)
+        showError(errorMsg)
       } finally {
         setIsLoadingUsers(false)
       }
@@ -63,7 +70,7 @@ function DashboardContent() {
     if (user) {
       fetchUsers()
     }
-  }, [user])
+  }, [user, showError])
 
   // Filter users based on debounced search query and department
   useEffect(() => {
@@ -107,8 +114,27 @@ function DashboardContent() {
   }, [debouncedSearchQuery, selectedDepartment, router])
 
   // Retry handler for error state
-  const handleRetry = () => {
-    window.location.reload()
+  const handleRetry = async () => {
+    setIsLoadingUsers(true)
+    setError(null)
+    try {
+      const response = await getAllUsers({ pageSize: 100 })
+      if (response.success) {
+        setUsers(response.data)
+        setFilteredUsers(response.data)
+        showSuccess('Users loaded successfully!')
+      } else {
+        const errorMsg = response.error || 'Failed to load users'
+        setError(errorMsg)
+        showError(errorMsg)
+      }
+    } catch (err) {
+      const errorMsg = 'An unexpected error occurred while loading users'
+      setError(errorMsg)
+      showError(errorMsg)
+    } finally {
+      setIsLoadingUsers(false)
+    }
   }
 
   // Logout handler
@@ -197,7 +223,7 @@ function DashboardContent() {
 
         {/* Content Area */}
         {isLoadingUsers ? (
-          <LoadingSpinner message="Loading users..." />
+          <SkeletonLoader variant="card" count={12} />
         ) : error ? (
           <ErrorState message={error} onRetry={handleRetry} />
         ) : filteredUsers.length === 0 && users.length > 0 ? (
