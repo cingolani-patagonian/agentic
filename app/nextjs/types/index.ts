@@ -7,7 +7,13 @@ export interface User {
   name: string
   email: string
   username?: string
-  role?: string
+  role: string
+  avatar: string
+  department: string
+  location: string
+  bio: string
+  joinDate: string
+  status: 'active' | 'inactive'
 }
 
 export interface ApiResponse<T> {

@@ -103,3 +103,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When securing pages or implementing authentication redirects
     - When adding or modifying mock user credentials
     - When integrating real backend authentication to replace mock system
+
+- app_docs/feature-8e7e99d7-mock-user-database.md
+  - Conditions:
+    - When working with user profile data or user-related features
+    - When implementing user directory, profile pages, or team dashboards
+    - When needing realistic test data for user-related functionality
+    - When working with the User type interface in types/index.ts
+    - When querying or filtering users by role, department, location, or status
+    - When implementing user search or listing functionality
+    - When integrating user avatars or profile information in components
+    - When extending or modifying the mock user database structure
