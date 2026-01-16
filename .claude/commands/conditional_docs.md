@@ -140,3 +140,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing real-time client-side filtering
     - When troubleshooting dashboard rendering or user card display issues
     - When extending dashboard functionality with sorting or additional filters
+
+- app_docs/feature-216fce1d-user-card-component.md
+  - Conditions:
+    - When working with the UserCard component
+    - When implementing avatar fallback functionality or user initials display
+    - When adding location display to user profile cards
+    - When implementing click-to-view-details functionality for cards
+    - When enhancing component accessibility with ARIA labels
+    - When implementing keyboard navigation for interactive cards
+    - When troubleshooting avatar loading errors or image fallbacks
+    - When creating reusable card components with optional interactivity
+    - When working with Next.js Image component error handling
+    - When implementing responsive card layouts for user profiles
