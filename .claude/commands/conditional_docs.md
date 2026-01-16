@@ -91,3 +91,15 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with Next.js environment variables (NEXT_PUBLIC_ prefix)
     - When integrating Next.js with the existing FastAPI or Vite stack
     - When running multiple applications on different ports (3000, 5173, 8000)
+
+- app_docs/feature-ca241132-auth-system.md
+  - Conditions:
+    - When working with authentication in the Next.js application
+    - When implementing login, logout, or session management features
+    - When working with protected routes or authentication middleware
+    - When troubleshooting JWT-like token generation or validation
+    - When implementing AuthContext or useAuth hook
+    - When working with localStorage-based session persistence
+    - When securing pages or implementing authentication redirects
+    - When adding or modifying mock user credentials
+    - When integrating real backend authentication to replace mock system
