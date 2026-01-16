@@ -127,3 +127,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When migrating from mock API to real backend implementation
     - When implementing React components that fetch user data
     - When troubleshooting API-related issues in the Next.js application
+
+- app_docs/feature-4c8ea440-dashboard-user-profiles.md
+  - Conditions:
+    - When working with the dashboard page at /dashboard route
+    - When implementing user profile card display or grid layouts
+    - When building search or filter functionality for user lists
+    - When working with responsive grid layouts in Next.js applications
+    - When implementing loading, error, or empty state UI patterns
+    - When creating reusable UI components (cards, search bars, filters, spinners)
+    - When integrating mock API data with frontend components
+    - When implementing real-time client-side filtering
+    - When troubleshooting dashboard rendering or user card display issues
+    - When extending dashboard functionality with sorting or additional filters
