@@ -85,7 +85,7 @@ fi
 
 # Start frontend
 echo -e "${GREEN}Starting frontend server...${NC}"
-cd "$PROJECT_ROOT/app/client"
+cd "$PROJECT_ROOT/app/nextjs"
 npm run dev &
 FRONTEND_PID=$!
 

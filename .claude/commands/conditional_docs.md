@@ -114,3 +114,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing user search or listing functionality
     - When integrating user avatars or profile information in components
     - When extending or modifying the mock user database structure
+
+- app_docs/feature-287fdce1-mock-backend-api.md
+  - Conditions:
+    - When implementing API calls or data fetching in frontend components
+    - When working with asynchronous data loading or API integration patterns
+    - When testing loading states, error handling, or network delays
+    - When implementing pagination for user lists or search results
+    - When building search functionality across user data (name, email, role)
+    - When filtering users by department or other criteria
+    - When working with API response formatting or error handling patterns
+    - When migrating from mock API to real backend implementation
+    - When implementing React components that fetch user data
+    - When troubleshooting API-related issues in the Next.js application
