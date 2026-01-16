@@ -1,19 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useDebounce } from 'use-debounce'
 import { useAuth } from '@/hooks/useAuth'
 import { getAllUsers } from '@/lib/api'
 import { User } from '@/types'
 import UserCard from '@/components/UserCard'
 import SearchBar from '@/components/SearchBar'
 import DepartmentFilter from '@/components/DepartmentFilter'
+import ActiveFilters from '@/components/ActiveFilters'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import EmptyState from '@/components/EmptyState'
 import ErrorState from '@/components/ErrorState'
 
-export default function DashboardPage() {
+function DashboardContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { user, logout, isLoading } = useAuth()
 
   // User data state
@@ -22,9 +25,12 @@ export default function DashboardPage() {
   const [isLoadingUsers, setIsLoadingUsers] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Filter state
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedDepartment, setSelectedDepartment] = useState('All Departments')
+  // Filter state - initialize from URL parameters
+  const [searchInput, setSearchInput] = useState(searchParams.get('search') || '')
+  const [selectedDepartment, setSelectedDepartment] = useState(searchParams.get('department') || 'All Departments')
+
+  // Debounced search query
+  const [debouncedSearchQuery] = useDebounce(searchInput, 300)
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -59,13 +65,13 @@ export default function DashboardPage() {
     }
   }, [user])
 
-  // Filter users based on search query and department
+  // Filter users based on debounced search query and department
   useEffect(() => {
     let result = users
 
     // Apply search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
+    if (debouncedSearchQuery.trim()) {
+      const query = debouncedSearchQuery.toLowerCase()
       result = result.filter(
         (u) =>
           u.name.toLowerCase().includes(query) ||
@@ -80,7 +86,25 @@ export default function DashboardPage() {
     }
 
     setFilteredUsers(result)
-  }, [searchQuery, selectedDepartment, users])
+  }, [debouncedSearchQuery, selectedDepartment, users])
+
+  // Update URL parameters when filters change
+  useEffect(() => {
+    const params = new URLSearchParams()
+
+    if (debouncedSearchQuery.trim()) {
+      params.set('search', debouncedSearchQuery)
+    }
+
+    if (selectedDepartment !== 'All Departments') {
+      params.set('department', selectedDepartment)
+    }
+
+    const queryString = params.toString()
+    const newUrl = queryString ? `/dashboard?${queryString}` : '/dashboard'
+
+    router.replace(newUrl)
+  }, [debouncedSearchQuery, selectedDepartment, router])
 
   // Retry handler for error state
   const handleRetry = () => {
@@ -91,6 +115,20 @@ export default function DashboardPage() {
   const handleLogout = () => {
     logout()
     router.push('/login')
+  }
+
+  // Clear filter handlers
+  const handleClearSearch = () => {
+    setSearchInput('')
+  }
+
+  const handleClearDepartment = () => {
+    setSelectedDepartment('All Departments')
+  }
+
+  const handleClearAll = () => {
+    setSearchInput('')
+    setSelectedDepartment('All Departments')
   }
 
   // Extract unique departments for filter
@@ -134,8 +172,8 @@ export default function DashboardPage() {
         <div className="mb-8 flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <SearchBar
-              value={searchQuery}
-              onChange={setSearchQuery}
+              value={searchInput}
+              onChange={setSearchInput}
               placeholder="Search by name, email, or role..."
             />
           </div>
@@ -147,6 +185,15 @@ export default function DashboardPage() {
             />
           </div>
         </div>
+
+        {/* Active Filters Indicator */}
+        <ActiveFilters
+          searchQuery={debouncedSearchQuery}
+          selectedDepartment={selectedDepartment}
+          onClearSearch={handleClearSearch}
+          onClearDepartment={handleClearDepartment}
+          onClearAll={handleClearAll}
+        />
 
         {/* Content Area */}
         {isLoadingUsers ? (
@@ -177,5 +224,13 @@ export default function DashboardPage() {
         )}
       </main>
     </div>
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<LoadingSpinner message="Loading dashboard..." />}>
+      <DashboardContent />
+    </Suspense>
   )
 }
