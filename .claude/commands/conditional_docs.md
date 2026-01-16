@@ -80,3 +80,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with password hashing or user management
     - When modifying authentication state management on the frontend
     - When implementing protected routes or authentication guards
+
+- app_docs/feature-60c16f2f-nextjs-vercel-setup.md
+  - Conditions:
+    - When working with Next.js application in app/nextjs/ directory
+    - When implementing server-side rendering or Next.js App Router features
+    - When configuring Vercel deployment or security headers
+    - When troubleshooting Next.js build, TypeScript, or Tailwind CSS issues
+    - When setting up new Next.js components, pages, or layouts
+    - When working with Next.js environment variables (NEXT_PUBLIC_ prefix)
+    - When integrating Next.js with the existing FastAPI or Vite stack
+    - When running multiple applications on different ports (3000, 5173, 8000)
