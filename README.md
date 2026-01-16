@@ -1,120 +1,162 @@
-# Natural Language SQL Interface
+# Next.js Application Showcase
 
-A web application that converts natural language queries to SQL using AI, built with FastAPI and Vite + TypeScript.
+A modern web application built with Next.js 14, TypeScript, and Tailwind CSS, demonstrating the power of AI-driven development through the AI Developer Workflow (ADW) system. This project showcases how autonomous AI agents can build production-ready applications from GitHub issues.
+
+## Project Overview
+
+This application was built entirely using the ADW (AI Developer Workflow) system, an autonomous AI development framework that processes GitHub issues and implements complete features without human intervention. The project features a Next.js application with authentication, user profiles, search functionality, and responsive design - all implemented by AI agents following structured workflows.
 
 ## Features
 
-- 🗣️ Natural language to SQL conversion using OpenAI or Anthropic
-- 📁 Drag-and-drop file upload (.csv and .json)
-- 📊 Interactive table results display
-- 🔒 SQL injection protection
-- 🔐 User authentication and authorization (JWT-based)
-- 👤 User registration and login system
-- ⚡ Fast development with Vite and uv
+### Core Application Features
+- **Modern Next.js 14** with App Router and TypeScript
+- **Authentication System** with mock users and JWT-like tokens
+- **User Dashboard** with profile cards and data management
+- **Search & Filter** functionality for finding users
+- **Responsive Navigation** with mobile-friendly layout
+- **Loading States** and comprehensive error handling
+- **Tailwind CSS** styling with dark mode support
+- **Vercel Deployment** ready with security headers
+
+### Legacy Features (FastAPI + Vite Stack)
+- Natural language to SQL conversion using OpenAI or Anthropic
+- Drag-and-drop file upload (.csv and .json)
+- Interactive table results display
+- SQL injection protection
+- User authentication and authorization (JWT-based)
+- User registration and login system
+- Fast development with Vite and uv
+
+## Tech Stack
+
+### Frontend (Next.js Application)
+- **Framework**: Next.js 14+ with App Router
+- **Language**: TypeScript 5+ with strict mode
+- **Styling**: Tailwind CSS 3+ with custom theming
+- **State Management**: React Context API with hooks
+- **Deployment**: Vercel with security headers
+
+### Backend (Legacy - FastAPI)
+- **Framework**: FastAPI with Python 3.10+
+- **Database**: SQLite with SQL injection protection
+- **AI Integration**: OpenAI and Anthropic APIs
+- **Authentication**: JWT with bcrypt password hashing
+
+### Development Tools
+- **AI Development**: ADW (AI Developer Workflow) system
+- **AI Agent**: Claude Code CLI for autonomous implementation
+- **Version Control**: Git with GitHub integration
+- **Package Managers**: npm (frontend), uv (Python backend)
+
+### Deployment
+- **Frontend**: Vercel (Next.js)
+- **Infrastructure**: Git worktrees for isolated development
+- **CI/CD**: Automated through ADW workflows
 
 ## Prerequisites
 
+### For Next.js Application
+- Node.js 18+ installed
+- npm package manager
+- Git for version control
+
+### For Legacy Stack (Optional)
 - Python 3.10+
 - uv (Python package manager)
-- Node.js 18+
 - Bun (or your preferred npm tool: npm, yarn, etc.)
 - OpenAI API key and/or Anthropic API key
 
-## Setup
-
-### 1. Install Dependencies
-
-```bash
-# Backend
-cd app/server
-uv sync --all-extras
-
-# Frontend
-cd app/client
-bun install
-```
-
-### 2. Environment Configuration
-
-Set up your API keys and authentication configuration in the server directory:
-
-```bash
-cd app/server
-cp .env.sample .env
-# Edit .env and add your configuration:
-# - Add your OpenAI and/or Anthropic API keys
-# - Generate a strong JWT_SECRET_KEY (see below)
-# - Configure TOKEN_EXPIRE_MINUTES (default: 30)
-```
-
-**Generating a strong JWT secret key:**
-```bash
-openssl rand -hex 32
-```
-
-Add the generated key to your `.env` file:
-```
-JWT_SECRET_KEY=your-generated-secret-key-here
-TOKEN_EXPIRE_MINUTES=30
-```
-
 ## Quick Start
 
-Use the provided script to start both services:
+### Next.js Application (Recommended)
 
 ```bash
-./scripts/start.sh
+# Navigate to Next.js directory
+cd app/nextjs
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-Press `Ctrl+C` to stop both services.
+The application will be available at **http://localhost:3000**
 
-The script will:
-- Check that `.env` exists in `app/server/`
-- Start the backend on http://localhost:8000
-- Start the frontend on http://localhost:5173
-- Handle graceful shutdown when you exit
+### Mock Credentials for Testing
 
-## Manual Start (Alternative)
+The Next.js application includes mock authentication with test users:
 
-### Backend
-```bash
-cd app/server
-# .env is loaded automatically by python-dotenv
-uv run python server.py
+| Username | Password | Role |
+|----------|----------|------|
+| `admin` | `admin123` | admin |
+| `user` | `user123` | user |
+
+**Security Note**: These are development-only credentials. Never use hardcoded credentials in production.
+
+### Using the Next.js Application
+
+1. **Access the Application**: Navigate to http://localhost:3000
+2. **Login**: You'll be redirected to `/login` if not authenticated
+   - Use mock credentials: `admin` / `admin123` or `user` / `user123`
+3. **Explore Features**:
+   - **Dashboard** at `/dashboard` - View user profiles with search and filter
+   - **User Cards** - Browse user information in an organized grid layout
+   - **Search** - Find users by name, email, or bio
+   - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
+4. **Logout**: Click the "Logout" button in the navigation to end your session
+
+### Legacy Stack (Optional)
+
+For the FastAPI + Vite stack, see the detailed setup instructions below in the "Development" section.
+
+## Project Structure
+
+```
+.
+├── app/
+│   ├── nextjs/             # Next.js 14 application (MAIN APPLICATION)
+│   │   ├── app/            # Next.js App Router pages and layouts
+│   │   ├── components/     # Reusable React components
+│   │   ├── contexts/       # React Context providers (AuthContext)
+│   │   ├── hooks/          # Custom React hooks (useAuth)
+│   │   ├── lib/            # Utility functions and services
+│   │   ├── types/          # TypeScript type definitions
+│   │   └── vercel.json     # Vercel deployment configuration
+│   │
+│   ├── client/             # Legacy Vite + TypeScript frontend
+│   └── server/             # Legacy FastAPI backend
+│
+├── adws/                   # AI Developer Workflow system
+│   ├── adw_modules/        # Core ADW modules (agent, state, git_ops)
+│   ├── adw_triggers/       # Automation triggers (cron, webhook)
+│   └── adw_*.py            # Workflow scripts (plan, build, test, review)
+│
+├── specs/                  # Implementation specifications (AI-generated)
+├── app_docs/               # Feature documentation (AI-generated)
+├── agents/                 # Agent execution logs and state
+├── trees/                  # Git worktrees for isolated development
+├── scripts/                # Utility scripts (start.sh, etc.)
+└── logs/                   # Structured session logs
 ```
 
-### Frontend
-```bash
-cd app/client
-bun run dev
-```
+### Directory Descriptions
 
-## Usage
+- **`app/nextjs/`**: The main Next.js application with authentication, dashboard, user profiles, and responsive design. This is the primary application showcasing ADW capabilities.
 
-### First Time Setup
+- **`app/client/` & `app/server/`**: Legacy FastAPI backend with Vite frontend for natural language SQL queries. These demonstrate the original project before ADW transformation.
 
-1. **Register an Account**: Navigate to http://localhost:5173 (will redirect to `/login.html`)
-   - Click "Create one" to go to the registration page
-   - Fill in username, email, and password
-   - Click "Create Account"
-   - You'll be automatically logged in and redirected to the main app
+- **`adws/`**: The AI Developer Workflow system that orchestrates autonomous development. Contains modules for agent execution, state management, GitHub integration, and workflow orchestration.
 
-2. **Login** (for returning users):
-   - Navigate to http://localhost:5173
-   - Enter your username and password
-   - Click "Sign In"
+- **`specs/`**: AI-generated implementation plans created during the planning phase. Each spec corresponds to a GitHub issue and contains detailed step-by-step tasks.
 
-### Using the Application
+- **`app_docs/`**: AI-generated feature documentation created after implementation. Includes technical guides, usage instructions, and architecture notes for each feature.
 
-1. **Upload Data**: Click "Upload" to open the modal
-   - Use sample data buttons for quick testing
-   - Or drag and drop your own .csv or .json files
-   - Uploading a file with the same name will overwrite the existing table
-2. **Query Your Data**: Type a natural language query like "Show me all users who signed up last week"
-   - Press `Cmd+Enter` (Mac) or `Ctrl+Enter` (Windows/Linux) to run the query
-3. **View Results**: See the generated SQL and results in a table format
-4. **Manage Tables**: Click the × button on any table to remove it
-5. **Logout**: Click the "Logout" button in the header to end your session
+- **`agents/`**: Execution logs from AI agents including raw output from Claude Code CLI sessions, state files, and screenshots from testing phases.
+
+- **`trees/`**: Git worktrees created for isolated development. Each ADW workflow runs in its own worktree with dedicated ports and filesystem isolation.
+
+- **`scripts/`**: Utility scripts for common operations like starting the legacy stack or stopping services.
 
 ## Development
 
@@ -362,6 +404,22 @@ For detailed technical documentation, configuration options, and troubleshooting
 
 ## Troubleshooting
 
+### Next.js Application
+
+**Port already in use:**
+- Check what's using port 3000: `lsof -i :3000`
+- Use a different port: `npm run dev -- -p 3001`
+
+**Build errors:**
+- Clear the cache: `rm -rf .next node_modules && npm install`
+- Check Node version: `node --version` (requires 18+)
+
+**TypeScript errors:**
+- Run type checking: `cd app/nextjs && npx tsc --noEmit`
+- Clear TypeScript cache: `rm -f tsconfig.tsbuildinfo`
+
+### Legacy Stack
+
 **Backend won't start:**
 - Check Python version: `python --version` (requires 3.12+)
 - Verify API keys are set: `echo $OPENAI_API_KEY`
@@ -373,3 +431,16 @@ For detailed technical documentation, configuration options, and troubleshooting
 **CORS issues:**
 - Ensure backend is running on port 8000
 - Check vite.config.ts proxy settings
+
+## Additional Documentation
+
+For more detailed information about specific aspects of the project:
+
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Step-by-step guide for deploying the Next.js application to Vercel
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Comprehensive explanation of the ADW system and agentic AI development process
+- **[app/nextjs/README.md](app/nextjs/README.md)** - Next.js specific documentation with setup and configuration details
+- **[adws/README.md](adws/README.md)** - Complete ADW system documentation with technical details and usage examples
+
+## License
+
+This project demonstrates autonomous AI development capabilities using the ADW system.
