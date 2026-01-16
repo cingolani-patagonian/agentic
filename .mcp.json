@@ -6,7 +6,7 @@
         "@playwright/mcp@latest",
         "--isolated",
         "--config",
-        "/Users/cingolani/Documents/Patagonian/agentic/trees/216fce1d/playwright-mcp-config.json"
+        "/Users/cingolani/Documents/Patagonian/agentic/trees/20baf7ca/playwright-mcp-config.json"
       ]
     }
   }
