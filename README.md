@@ -142,7 +142,8 @@ bun run preview            # Preview production build
 .
 ├── app/                    # Main application
 │   ├── client/             # Vite + TypeScript frontend
-│   └── server/             # FastAPI backend
+│   ├── server/             # FastAPI backend
+│   └── nextjs/             # Next.js application (see below)
 │
 ├── adws/                   # AI Developer Workflow (ADW) - GitHub issue automation system
 ├── scripts/                # Utility scripts (start.sh, stop_apps.sh)
@@ -151,6 +152,44 @@ bun run preview            # Preview production build
 ├── agents/                 # Agent execution logging
 └── logs/                   # Structured session logs
 ```
+
+## Next.js Application
+
+This project includes a modern Next.js 14+ application in `app/nextjs/` configured for Vercel deployment with TypeScript and Tailwind CSS.
+
+### Quick Start
+
+```bash
+# Navigate to Next.js directory
+cd app/nextjs
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+The Next.js application will be available at http://localhost:3000.
+
+### Key Features
+
+- **Next.js 14+** with App Router for modern React patterns
+- **TypeScript** with strict mode for type safety
+- **Tailwind CSS** for utility-first styling
+- **Vercel-ready** deployment configuration
+- **Coexistence** with existing FastAPI + Vite stack
+
+### Documentation
+
+For detailed setup, development, and deployment instructions, see [`app/nextjs/README.md`](app/nextjs/README.md).
+
+### Port Configuration
+
+The Next.js application runs on port 3000, allowing it to coexist with the existing stack:
+- **Next.js**: Port 3000
+- **FastAPI**: Port 8000
+- **Vite**: Port 5173
 
 ## API Endpoints
 

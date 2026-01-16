@@ -23,6 +23,12 @@ yarn-error.log*
 dist/
 .npm
 
+# Next.js
+.next/
+out/
+*.tsbuildinfo
+.env*.local
+
 # Database
 *.db
 *.sqlite
