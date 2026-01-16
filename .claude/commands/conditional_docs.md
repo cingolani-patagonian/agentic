@@ -180,3 +180,19 @@ This prompt helps you determine what documentation you should read based on the 
     - When troubleshooting mobile menu animations or transitions
     - When working with authentication-aware navigation links
     - When using useClickOutside hook for menu functionality
+
+- app_docs/feature-cef3a9ed-loading-states-error-handling.md
+  - Conditions:
+    - When implementing loading states or skeleton loaders
+    - When adding toast notifications or user feedback mechanisms
+    - When implementing error boundaries or error handling
+    - When working with retry logic for failed API calls
+    - When implementing offline detection or network status monitoring
+    - When creating custom 404 pages or error pages
+    - When working with the useToast or useOnlineStatus hooks
+    - When integrating ToastContext or ToastProvider in components
+    - When troubleshooting error handling, loading states, or user feedback
+    - When implementing auto-dismiss notifications or progress indicators
+    - When adding exponential backoff retry mechanisms
+    - When working with error categorization (network, auth, validation errors)
+    - When enhancing user experience with visual feedback during async operations
