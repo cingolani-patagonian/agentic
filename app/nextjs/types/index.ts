@@ -6,6 +6,8 @@ export interface User {
   id: string
   name: string
   email: string
+  username?: string
+  role?: string
 }
 
 export interface ApiResponse<T> {
@@ -21,4 +23,28 @@ export interface PageProps {
 
 export interface LayoutProps {
   children: React.ReactNode
+}
+
+// Authentication types
+export interface AuthUser {
+  username: string
+  role: string
+}
+
+export interface AuthToken {
+  token: string
+  expiresAt: number
+}
+
+export interface LoginCredentials {
+  username: string
+  password: string
+}
+
+export interface AuthContextType {
+  user: AuthUser | null
+  isLoading: boolean
+  login: (credentials: LoginCredentials) => Promise<void>
+  logout: () => void
+  checkAuth: () => void
 }
