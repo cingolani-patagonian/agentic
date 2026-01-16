@@ -6,219 +6,206 @@ adw_id: `60c16f2f`
 issue_json: `{"number":1,"title":"Setup Next.js project with Vercel deployment configuration","body":"# Issue #1: Project Setup and Vercel Configuration\n\n**Title:** Setup Next.js project with Vercel deployment configuration\n\n**Labels:** feature, setup\n\n**Workflow:** adw_sdlc_iso\n\n---\n\n## Description\n\nInitialize a new Next.js project optimized for Vercel deployment with TypeScript support.\n\n## Requirements\n\n- Create Next.js 14+ application with TypeScript\n- Configure for Vercel deployment (vercel.json if needed)\n- Setup basic project structure:\n  - `/app` directory for pages\n  - `/components` directory for React components\n  - `/lib` directory for utilities\n  - `/types` directory for TypeScript types\n- Add Tailwind CSS for styling\n- Create basic layout with navigation\n- Add README.md with deployment instructions\n\n## Acceptance Criteria\n\n- Project builds successfully\n- Can be deployed to Vercel\n- TypeScript configured properly\n- Tailwind CSS working"}`
 
 ## Feature Description
-This feature establishes a new Next.js 14+ application alongside the existing FastAPI + Vite stack. The Next.js application will be configured for seamless Vercel deployment with TypeScript and Tailwind CSS. This provides a modern React framework with server-side rendering capabilities, optimized for production deployment on Vercel's platform. The setup includes a well-organized project structure with dedicated directories for pages, components, utilities, and type definitions.
+This feature involves setting up a modern Next.js 14+ application in the `app/nextjs/` directory with full TypeScript support, Tailwind CSS styling, and Vercel deployment configuration. The setup will coexist with the existing FastAPI + Vite stack and provide a foundation for building server-side rendered React applications. The project will follow Next.js best practices with the App Router architecture, strict TypeScript configuration, and production-ready security headers.
 
 ## User Story
 As a developer
-I want to have a Next.js application configured for Vercel deployment
-So that I can build modern React applications with server-side rendering and deploy them seamlessly to production
+I want a Next.js application configured for Vercel deployment
+So that I can build modern, server-side rendered React applications with TypeScript and deploy them seamlessly to Vercel's platform
 
 ## Problem Statement
-The current application uses FastAPI + Vite for the backend and frontend. There is a need to introduce a Next.js application structure that can coexist with the existing stack and be deployed to Vercel. This requires setting up a completely new Next.js project with proper TypeScript configuration, Tailwind CSS styling, and Vercel-optimized settings.
+The project currently has a FastAPI backend and Vite frontend, but lacks a modern Next.js setup for server-side rendered applications. Developers need a properly configured Next.js environment with TypeScript, Tailwind CSS, and Vercel deployment capabilities to build production-ready applications that benefit from Next.js features like server components, optimized bundling, and automatic code splitting.
 
 ## Solution Statement
-Create a new Next.js 14+ application in a dedicated directory (`app/nextjs`) with TypeScript support, Tailwind CSS, and Vercel deployment configuration. The project will follow Next.js 14 conventions using the App Router pattern, with a clear directory structure for components, utilities, and types. A basic layout with navigation will be implemented, and comprehensive documentation will be provided for local development and Vercel deployment.
+Create a complete Next.js 14+ application in `app/nextjs/` with TypeScript, Tailwind CSS, and Vercel configuration. The solution includes proper project structure with app/, components/, lib/, and types/ directories, security headers, environment variable management, and comprehensive documentation for development and deployment. The application will run on port 3000 to coexist with the existing stack and provide a solid foundation for building modern React applications.
 
 ## Relevant Files
 Use these files to implement the feature:
 
-- `README.md` - Update to include Next.js setup and deployment instructions
-- `.gitignore` - Ensure Next.js build artifacts are ignored
-- `scripts/start.sh` - May need updates if Next.js should run alongside existing stack
+- `app/nextjs/package.json` - Defines dependencies for Next.js 14+, React 18+, TypeScript 5+, Tailwind CSS, and development tools
+- `app/nextjs/next.config.js` - Configures Next.js with security headers, image optimization, and production settings
+- `app/nextjs/tsconfig.json` - TypeScript configuration with strict mode and path aliases
+- `app/nextjs/tailwind.config.ts` - Tailwind CSS configuration with custom theme and content paths
+- `app/nextjs/postcss.config.mjs` - PostCSS configuration for Tailwind CSS processing
+- `app/nextjs/.eslintrc.json` - ESLint configuration extending Next.js standards
+- `app/nextjs/vercel.json` - Vercel deployment configuration with security headers and build settings
+- `app/nextjs/.env.local.example` - Environment variable template for configuration
+- `app/nextjs/app/layout.tsx` - Root layout component with navigation and global structure
+- `app/nextjs/app/page.tsx` - Home page component with welcome content
+- `app/nextjs/app/globals.css` - Global styles including Tailwind directives and CSS variables
+- `app/nextjs/components/Navigation.tsx` - Navigation component for site-wide navigation
+- `app/nextjs/types/index.ts` - Common TypeScript type definitions
+- `app/nextjs/README.md` - Comprehensive documentation for setup, development, and deployment
+- `README.md` (root) - Main project README documenting the Next.js addition alongside existing stack
 
 ### New Files
-
-The following new files and directories need to be created in `app/nextjs/`:
-
-- `app/nextjs/package.json` - Next.js project dependencies and scripts
-- `app/nextjs/tsconfig.json` - TypeScript configuration for Next.js
-- `app/nextjs/next.config.js` - Next.js framework configuration
-- `app/nextjs/tailwind.config.ts` - Tailwind CSS configuration
-- `app/nextjs/postcss.config.mjs` - PostCSS configuration for Tailwind
-- `app/nextjs/.eslintrc.json` - ESLint configuration for Next.js
-- `app/nextjs/vercel.json` - Vercel deployment configuration (if needed)
-- `app/nextjs/README.md` - Next.js-specific documentation and deployment guide
-- `app/nextjs/.env.local.example` - Environment variables template
-- `app/nextjs/.gitignore` - Next.js-specific gitignore patterns
-
-**App Directory Structure:**
-- `app/nextjs/app/page.tsx` - Home page component
-- `app/nextjs/app/layout.tsx` - Root layout with navigation
-- `app/nextjs/app/globals.css` - Global styles with Tailwind imports
-
-**Components Directory:**
-- `app/nextjs/components/Navigation.tsx` - Navigation component
-- `app/nextjs/components/README.md` - Components directory documentation
-
-**Lib Directory:**
-- `app/nextjs/lib/utils.ts` - Utility functions
-- `app/nextjs/lib/README.md` - Lib directory documentation
-
-**Types Directory:**
-- `app/nextjs/types/index.ts` - TypeScript type definitions
-- `app/nextjs/types/README.md` - Types directory documentation
-
-**Public Directory:**
-- `app/nextjs/public/.gitkeep` - Placeholder for static assets
+- `app/nextjs/lib/utils.ts` - Utility functions and helper methods (create if missing)
+- `.claude/commands/e2e/test_nextjs_setup.md` - E2E test specification to validate Next.js setup and deployment readiness
 
 ## Implementation Plan
-
 ### Phase 1: Foundation
-Set up the basic Next.js project structure with all required configuration files. This includes initializing the project with TypeScript support, configuring Tailwind CSS, and establishing the core directory structure (`/app`, `/components`, `/lib`, `/types`).
+The Next.js project structure has already been created in `app/nextjs/` with all required configuration files (package.json, tsconfig.json, next.config.js, tailwind.config.ts, vercel.json). The foundation includes TypeScript strict mode, ESLint configuration, and security headers. Dependencies need to be installed, and the project needs validation to ensure it builds successfully.
 
 ### Phase 2: Core Implementation
-Implement the application's basic functionality including a root layout with navigation, a home page, and reusable components. Configure TypeScript strict mode and ESLint rules. Set up environment variable handling and create utility functions.
+The core application structure is in place with the App Router architecture. The root layout (app/layout.tsx) provides the application shell with metadata and navigation integration. The home page (app/page.tsx) serves as the entry point. The Navigation component (components/Navigation.tsx) provides site-wide navigation. Global styles (app/globals.css) integrate Tailwind CSS with custom CSS variables. All components need validation for proper TypeScript types and functionality.
 
 ### Phase 3: Integration
-Configure Vercel deployment settings, update project documentation with setup and deployment instructions, and ensure the Next.js application can coexist with the existing FastAPI + Vite stack. Create comprehensive README documentation for both local development and Vercel deployment.
+The Next.js application integrates with the existing FastAPI + Vite stack by running on port 3000 (distinct from port 8000 for FastAPI and port 5173 for Vite). Documentation in both the root README.md and app/nextjs/README.md explains how to run all applications simultaneously. Environment variables are managed through .env.local for development. The Vercel deployment configuration (vercel.json) ensures production deployment works seamlessly with proper security headers and build commands.
 
 ## Step by Step Tasks
 IMPORTANT: Execute every step in order, top to bottom.
 
-### 1. Create Next.js Project Directory Structure
-- Create `app/nextjs/` directory as the root for the Next.js application
-- Create core directories: `app/`, `components/`, `lib/`, `types/`, `public/`
-- Add `.gitkeep` files to preserve empty directories in git
+### 1. Validate Existing Configuration Files
+- Read all configuration files to verify they exist and contain correct settings
+- Verify package.json has Next.js 14+, React 18+, TypeScript 5+, and Tailwind CSS 3+
+- Verify tsconfig.json has strict mode enabled and correct path aliases
+- Verify next.config.js includes security headers and proper settings
+- Verify tailwind.config.ts has correct content paths
+- Verify vercel.json has proper build commands and security headers
+- Verify .eslintrc.json extends Next.js configuration
 
-### 2. Initialize Next.js Configuration Files
-- Create `package.json` with Next.js 14+, React 18+, TypeScript, and Tailwind CSS dependencies
-- Add scripts for dev, build, start, and lint
-- Create `next.config.js` with optimized settings for production
-- Create `tsconfig.json` with strict TypeScript configuration extending Next.js defaults
-- Create `.eslintrc.json` extending Next.js ESLint configuration
-
-### 3. Configure Tailwind CSS
-- Create `tailwind.config.ts` with content paths for all component files
-- Create `postcss.config.mjs` with Tailwind and autoprefixer plugins
-- Create `app/globals.css` with Tailwind directives and custom CSS variables
-- Configure color scheme and typography defaults
-
-### 4. Implement Root Layout and Navigation
-- Create `app/layout.tsx` with HTML structure, metadata, and global styles import
-- Create `components/Navigation.tsx` with responsive navigation bar
-- Add navigation links for home and other sections
-- Include proper TypeScript types for component props
-
-### 5. Create Home Page
-- Create `app/page.tsx` as the main landing page
-- Add welcome content explaining the Next.js setup
-- Include sample components demonstrating Tailwind CSS styling
-- Add TypeScript types for page components
-
-### 6. Set Up Utilities and Types
-- Create `lib/utils.ts` with common utility functions (e.g., class name merging)
-- Create `types/index.ts` with common TypeScript type definitions
-- Add documentation README files for `components/`, `lib/`, and `types/` directories
-- Document the purpose and usage patterns for each directory
-
-### 7. Configure Environment Variables
-- Create `.env.local.example` with template for environment variables
-- Document required environment variables for API endpoints
-- Add `.env.local` to `.gitignore` to protect secrets
-- Create instructions for environment setup in README
-
-### 8. Set Up Vercel Deployment Configuration
-- Create `vercel.json` if custom configuration is needed (build settings, redirects, headers)
-- Configure build output directory and deployment settings
-- Document any required Vercel environment variables
-- Add deployment best practices to README
-
-### 9. Create Next.js-Specific Documentation
-- Create `app/nextjs/README.md` with comprehensive setup instructions
-- Document local development commands (`npm install`, `npm run dev`)
-- Add Vercel deployment instructions (connecting repo, environment variables, build settings)
-- Include troubleshooting section for common issues
-- Document project structure and conventions
-
-### 10. Update Project-Level Gitignore
-- Add Next.js-specific patterns to root `.gitignore`:
-  - `.next/` (build output)
-  - `out/` (static export)
-  - `*.tsbuildinfo` (TypeScript build info)
-  - `.env*.local` (environment files)
-
-### 11. Update Root README
-- Add section about Next.js application in project README
-- Document how Next.js coexists with existing FastAPI + Vite stack
-- Add links to Next.js-specific documentation
-- Include quick start commands for Next.js development
-
-### 12. Install Dependencies and Validate Setup
-- Navigate to `app/nextjs/` directory
+### 2. Install Dependencies
+- Navigate to app/nextjs/ directory
 - Run `npm install` to install all dependencies
-- Verify all packages are installed correctly
-- Check for any dependency conflicts
+- Verify node_modules is created and populated
+- Check for any installation errors or warnings
 
-### 13. Run Validation Commands
-- Execute all validation commands to ensure zero regressions
-- Test TypeScript compilation with no errors
-- Run production build to verify deployment readiness
-- Start development server to verify application runs correctly
+### 3. Validate Application Structure
+- Verify app/ directory exists with layout.tsx and page.tsx
+- Verify components/ directory exists with Navigation.tsx
+- Verify types/ directory exists with index.ts
+- Verify lib/ directory exists (create if missing)
+- Read all component files to ensure proper TypeScript types
+- Verify globals.css has Tailwind directives
+
+### 4. Create or Validate Utility Functions File
+- Check if app/nextjs/lib/utils.ts exists
+- If missing, create it with basic utility functions
+- Add TypeScript types for all utility functions
+- Export all utilities from the module
+
+### 5. Create E2E Test Specification
+- Read `.claude/commands/test_e2e.md` to understand E2E test format
+- Create `.claude/commands/e2e/test_nextjs_setup.md` E2E test file
+- Define test steps to validate:
+  - Next.js application starts on port 3000
+  - Home page renders successfully
+  - Navigation component is visible
+  - TypeScript compilation succeeds
+  - Build process completes without errors
+  - Tailwind CSS styles are applied correctly
+- Include screenshots for key validation points
+- Define success criteria based on acceptance criteria
+
+### 6. Validate TypeScript Configuration
+- Run `npx tsc --noEmit` in app/nextjs/ directory
+- Verify no TypeScript errors are present
+- Fix any type errors if found
+- Ensure strict mode is enforced
+
+### 7. Build the Application
+- Run `npm run build` in app/nextjs/ directory
+- Verify build completes successfully
+- Check for optimization warnings or errors
+- Verify .next directory is created with production build
+
+### 8. Test Development Server
+- Start development server with `npm run dev`
+- Verify server starts on port 3000
+- Access http://localhost:3000 to verify home page loads
+- Verify navigation component renders
+- Verify Tailwind CSS styles are applied
+- Stop development server
+
+### 9. Verify Vercel Configuration
+- Verify vercel.json has correct buildCommand and outputDirectory
+- Verify security headers are properly configured
+- Check that framework is set to "nextjs"
+- Ensure devCommand and installCommand are correct
+
+### 10. Update Root README Documentation
+- Verify root README.md mentions the Next.js application
+- Ensure port information is documented (3000 for Next.js)
+- Verify deployment instructions reference app/nextjs/README.md
+- Add any missing information about running Next.js alongside existing stack
+
+### 11. Create Environment Variables Template
+- Verify .env.local.example exists
+- Add common Next.js environment variables
+- Document NEXT_PUBLIC_ prefix for client-side variables
+- Include example API URL configuration
+
+### 12. Run Validation Commands
+- Execute all validation commands listed in the Validation Commands section
+- Verify zero regressions in server tests
+- Verify TypeScript compilation succeeds
+- Verify production build succeeds
+- Run E2E test to validate complete functionality
 
 ## Testing Strategy
-
 ### Unit Tests
-- No unit tests required for initial project setup
-- Future features should add Jest and React Testing Library for component testing
+Since this is a setup feature focused on project configuration rather than business logic, unit tests are minimal. Focus on:
+- TypeScript type checking across all components
+- ESLint validation for code quality
+- Build process validation to ensure production readiness
+- Basic component rendering validation in future development
+
+Future components should include:
+- React component tests using Jest and React Testing Library
+- Utility function tests in lib/utils.ts
+- Type validation tests for complex TypeScript types
 
 ### Edge Cases
-- Verify TypeScript strict mode catches type errors
-- Test build process completes without warnings
-- Ensure environment variables are properly loaded
-- Verify Tailwind CSS classes are properly purged in production build
-- Test navigation across different routes
-- Ensure proper handling of missing environment variables
+- Port 3000 already in use - document how to run on alternative port
+- Missing environment variables - application should handle gracefully
+- Build failures due to TypeScript errors - strict mode enforcement
+- Deployment to Vercel with incorrect configuration - vercel.json validation
+- Running Next.js alongside FastAPI and Vite - port conflict prevention
+- Node.js version compatibility - document minimum version requirement
+- Missing dependencies - npm install error handling
+- Invalid Tailwind CSS configuration - build process should catch
+- TypeScript strict mode violations - compilation should fail with clear errors
+- Security header configuration - verify headers are applied in production
 
 ## Acceptance Criteria
-- Next.js 14+ project successfully created in `app/nextjs/` directory
-- TypeScript configuration with strict mode enabled and zero compilation errors
-- Tailwind CSS properly configured and working with custom styles
-- Root layout implemented with navigation component
-- Home page created with sample content and styling
-- All required directories created (`/app`, `/components`, `/lib`, `/types`)
-- `npm run build` completes successfully with no errors
-- `npm run dev` starts development server successfully
-- Documentation in `app/nextjs/README.md` includes deployment instructions
-- Vercel deployment configuration ready (vercel.json if needed)
-- Root project README updated with Next.js setup information
-- Environment variable template created (`.env.local.example`)
-- `.gitignore` properly configured for Next.js artifacts
+- Next.js 14+ application is set up in app/nextjs/ directory
+- TypeScript is configured with strict mode and compiles without errors
+- Tailwind CSS is installed and working with custom configuration
+- Application builds successfully with `npm run build` producing optimized output
+- Development server starts on port 3000 without errors
+- Vercel configuration (vercel.json) is present with correct build settings and security headers
+- Project structure includes app/, components/, lib/, and types/ directories
+- Root layout with navigation is implemented and renders correctly
+- README.md documentation includes setup, development, and deployment instructions
+- Environment variable template (.env.local.example) is provided
+- TypeScript compilation (`npx tsc --noEmit`) passes with zero errors
+- ESLint validation passes with Next.js standards
+- Application can coexist with existing FastAPI (port 8000) and Vite (port 5173) applications
+- Production build is optimized and deployment-ready for Vercel
 
 ## Validation Commands
 Execute every command to validate the feature works correctly with zero regressions.
 
-- `cd app/nextjs && npm install` - Install all Next.js dependencies
+- `cd app/nextjs && npm install` - Install Next.js dependencies
 - `cd app/nextjs && npx tsc --noEmit` - Validate TypeScript configuration with zero errors
-- `cd app/nextjs && npm run build` - Build Next.js application for production with zero errors
-- `cd app/nextjs && npm run lint` - Run ESLint to ensure code quality
-- `cd app/server && uv run pytest` - Run server tests to validate no regressions in existing backend
-- `git status` - Verify all new files are tracked and .gitignore patterns work correctly
+- `cd app/nextjs && npm run lint` - Validate ESLint configuration and code quality
+- `cd app/nextjs && npm run build` - Build production version to validate deployment readiness
+- `cd app/server && uv run pytest` - Run server tests to validate the feature works with zero regressions
+- Read `.claude/commands/test_e2e.md`, then read and execute your new E2E `.claude/commands/e2e/test_nextjs_setup.md` test file to validate this functionality works
 
 ## Notes
-
-### Technology Choices
-- **Next.js 14+**: Latest stable version with App Router for modern React patterns
-- **TypeScript**: Strict mode enabled for maximum type safety
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
-- **ESLint**: Code quality and consistency enforcement
-
-### Coexistence with Existing Stack
-- Next.js application lives in `app/nextjs/` to keep it separate from existing `app/server/` and `app/client/`
-- Different port configuration may be needed (Next.js default is 3000)
-- Existing FastAPI + Vite application remains unchanged
-- Documentation clearly separates concerns between the two stacks
-
-### Deployment Considerations
-- Vercel automatically detects Next.js projects and configures build settings
-- Environment variables must be configured in Vercel dashboard
-- Build command: `npm run build` (Vercel default)
-- Output directory: `.next` (Vercel default)
-- Consider adding deployment hooks or GitHub Actions for automated testing
-
-### Future Enhancements
-- Add Jest and React Testing Library for component testing
-- Implement API integration with existing FastAPI backend
-- Add more pages and complex layouts
-- Set up Storybook for component documentation
-- Configure preview deployments for pull requests
-- Add performance monitoring and analytics
+- This setup uses npm as the package manager (not yarn or pnpm) for consistency
+- The Next.js application runs on port 3000 by default, separate from the existing stack
+- All environment variables for the browser must be prefixed with NEXT_PUBLIC_
+- The App Router (app/ directory) is used instead of the Pages Router for modern Next.js patterns
+- Vercel automatically detects Next.js projects and optimizes deployment
+- Security headers are configured both in next.config.js and vercel.json for defense in depth
+- The project uses React 18+ with server components support
+- Tailwind CSS is configured with CSS variables for theming support
+- TypeScript strict mode enforces type safety across the entire application
+- The setup is production-ready and follows Next.js best practices
+- No new npm libraries need to be installed beyond what's in package.json
+- The E2E test file should validate the complete setup including build, dev server, and styling
+- Consider adding Playwright tests in the future for comprehensive E2E testing
+- The existing FastAPI server and Vite client are unaffected by this Next.js setup
+- Most files already exist from previous implementation; focus is on validation and testing
