@@ -16,6 +16,7 @@
 
 import { User, ApiResponse } from '@/types'
 import { mockUsers, getUserById as getDbUserById, getUsersByDepartment as getDbUsersByDepartment } from '@/lib/mockDb'
+import { withRetry } from '@/lib/retryLogic'
 
 /**
  * Pagination parameters for list queries
@@ -116,47 +117,55 @@ function createErrorResponse(message: string): ApiResponse<never> & { timestamp:
  * ```
  */
 export async function getAllUsers(params?: PaginationParams): Promise<ApiResponse<User[]> & { timestamp: string } & PaginationMetadata> {
-  // Apply defaults
-  const page = params?.page ?? 1
-  const pageSize = params?.pageSize ?? 10
+  const result = await withRetry(async () => {
+    // Apply defaults
+    const page = params?.page ?? 1
+    const pageSize = params?.pageSize ?? 10
 
-  // Validate parameters
-  if (page < 1) {
-    return createErrorResponse('Page number must be 1 or greater') as any
+    // Validate parameters
+    if (page < 1) {
+      throw new Error('Page number must be 1 or greater')
+    }
+    if (pageSize < 1) {
+      throw new Error('Page size must be 1 or greater')
+    }
+
+    // Simulate API delay
+    await simulateDelay()
+
+    // Get all users from mock database
+    const allUsers = mockUsers
+
+    // Calculate pagination
+    const totalUsers = allUsers.length
+    const totalPages = Math.ceil(totalUsers / pageSize)
+    const startIndex = (page - 1) * pageSize
+    const endIndex = startIndex + pageSize
+
+    // Slice the users array for current page
+    const paginatedUsers = allUsers.slice(startIndex, endIndex)
+
+    // Build pagination metadata
+    const metadata: PaginationMetadata = {
+      totalUsers,
+      totalPages,
+      currentPage: page,
+      pageSize,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1
+    }
+
+    return {
+      ...createSuccessResponse(paginatedUsers),
+      ...metadata
+    }
+  })
+
+  if (!result.success) {
+    return createErrorResponse(result.error?.message || 'Failed to fetch users') as any
   }
-  if (pageSize < 1) {
-    return createErrorResponse('Page size must be 1 or greater') as any
-  }
 
-  // Simulate API delay
-  await simulateDelay()
-
-  // Get all users from mock database
-  const allUsers = mockUsers
-
-  // Calculate pagination
-  const totalUsers = allUsers.length
-  const totalPages = Math.ceil(totalUsers / pageSize)
-  const startIndex = (page - 1) * pageSize
-  const endIndex = startIndex + pageSize
-
-  // Slice the users array for current page
-  const paginatedUsers = allUsers.slice(startIndex, endIndex)
-
-  // Build pagination metadata
-  const metadata: PaginationMetadata = {
-    totalUsers,
-    totalPages,
-    currentPage: page,
-    pageSize,
-    hasNextPage: page < totalPages,
-    hasPreviousPage: page > 1
-  }
-
-  return {
-    ...createSuccessResponse(paginatedUsers),
-    ...metadata
-  }
+  return result.data!
 }
 
 /**
@@ -176,22 +185,30 @@ export async function getAllUsers(params?: PaginationParams): Promise<ApiRespons
  * ```
  */
 export async function getUserById(id: string): Promise<ApiResponse<User> & { timestamp: string }> {
-  // Validate input
+  // Validate input early (non-retryable)
   if (!id || id.trim() === '') {
     return createErrorResponse('User ID is required')
   }
 
-  // Simulate API delay
-  await simulateDelay()
+  const result = await withRetry(async () => {
+    // Simulate API delay
+    await simulateDelay()
 
-  // Fetch user from mock database
-  const user = getDbUserById(id)
+    // Fetch user from mock database
+    const user = getDbUserById(id)
 
-  if (!user) {
-    return createErrorResponse(`User not found with ID: ${id}`)
+    if (!user) {
+      throw new Error(`User not found with ID: ${id}`)
+    }
+
+    return createSuccessResponse(user)
+  })
+
+  if (!result.success) {
+    return createErrorResponse(result.error?.message || 'Failed to fetch user')
   }
 
-  return createSuccessResponse(user)
+  return result.data!
 }
 
 /**
@@ -220,7 +237,7 @@ export async function getUserById(id: string): Promise<ApiResponse<User> & { tim
  * ```
  */
 export async function searchUsers(query: string, options?: SearchOptions): Promise<ApiResponse<User[]> & { timestamp: string; resultCount?: number }> {
-  // Validate input
+  // Validate input early (non-retryable)
   if (!query || query.trim() === '') {
     return createErrorResponse('Search query is required') as any
   }
@@ -228,26 +245,34 @@ export async function searchUsers(query: string, options?: SearchOptions): Promi
     return createErrorResponse('Search query must be at least 2 characters long') as any
   }
 
-  // Simulate API delay
-  await simulateDelay()
+  const result = await withRetry(async () => {
+    // Simulate API delay
+    await simulateDelay()
 
-  // Prepare search query
-  const caseSensitive = options?.caseSensitive ?? false
-  const searchQuery = caseSensitive ? query : query.toLowerCase()
+    // Prepare search query
+    const caseSensitive = options?.caseSensitive ?? false
+    const searchQuery = caseSensitive ? query : query.toLowerCase()
 
-  // Search across name, email, and role fields
-  const results = mockUsers.filter(user => {
-    const name = caseSensitive ? user.name : user.name.toLowerCase()
-    const email = caseSensitive ? user.email : user.email.toLowerCase()
-    const role = caseSensitive ? user.role : user.role.toLowerCase()
+    // Search across name, email, and role fields
+    const results = mockUsers.filter(user => {
+      const name = caseSensitive ? user.name : user.name.toLowerCase()
+      const email = caseSensitive ? user.email : user.email.toLowerCase()
+      const role = caseSensitive ? user.role : user.role.toLowerCase()
 
-    return name.includes(searchQuery) || email.includes(searchQuery) || role.includes(searchQuery)
+      return name.includes(searchQuery) || email.includes(searchQuery) || role.includes(searchQuery)
+    })
+
+    return {
+      ...createSuccessResponse(results),
+      resultCount: results.length
+    }
   })
 
-  return {
-    ...createSuccessResponse(results),
-    resultCount: results.length
+  if (!result.success) {
+    return createErrorResponse(result.error?.message || 'Failed to search users') as any
   }
+
+  return result.data!
 }
 
 /**
@@ -276,19 +301,27 @@ export async function searchUsers(query: string, options?: SearchOptions): Promi
  * ```
  */
 export async function getUsersByDepartment(department: string): Promise<ApiResponse<User[]> & { timestamp: string; resultCount?: number }> {
-  // Validate input
+  // Validate input early (non-retryable)
   if (!department || department.trim() === '') {
     return createErrorResponse('Department is required') as any
   }
 
-  // Simulate API delay
-  await simulateDelay()
+  const result = await withRetry(async () => {
+    // Simulate API delay
+    await simulateDelay()
 
-  // Fetch users by department from mock database
-  const users = getDbUsersByDepartment(department)
+    // Fetch users by department from mock database
+    const users = getDbUsersByDepartment(department)
 
-  return {
-    ...createSuccessResponse(users),
-    resultCount: users.length
+    return {
+      ...createSuccessResponse(users),
+      resultCount: users.length
+    }
+  })
+
+  if (!result.success) {
+    return createErrorResponse(result.error?.message || 'Failed to fetch users by department') as any
   }
+
+  return result.data!
 }

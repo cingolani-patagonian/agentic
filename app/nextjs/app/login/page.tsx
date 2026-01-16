@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { useToast } from '@/hooks/useToast'
 
 export default function LoginPage() {
   const router = useRouter()
   const { user, login, isLoading: authLoading } = useAuth()
+  const { showError } = useToast()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   // Redirect if already authenticated
@@ -21,21 +22,20 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
 
     // Validation
     if (!username.trim() || !password.trim()) {
-      setError('Username and password are required')
+      showError('Username and password are required')
       return
     }
 
     if (username.length < 3) {
-      setError('Username must be at least 3 characters')
+      showError('Username must be at least 3 characters')
       return
     }
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters')
+      showError('Password must be at least 6 characters')
       return
     }
 
@@ -45,7 +45,10 @@ export default function LoginPage() {
       await login({ username, password })
       router.push('/dashboard')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed')
+      // Error is already shown in AuthContext, but we handle any unexpected errors here
+      if (err instanceof Error && !err.message.includes('Invalid credentials')) {
+        showError('An unexpected error occurred. Please try again.')
+      }
     } finally {
       setIsLoading(false)
     }
@@ -113,16 +116,6 @@ export default function LoginPage() {
               />
             </div>
           </div>
-
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="flex">
-                <div className="ml-3">
-                  <h3 className="text-sm font-medium text-red-800">{error}</h3>
-                </div>
-              </div>
-            </div>
-          )}
 
           <div>
             <button

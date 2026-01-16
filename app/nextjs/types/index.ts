@@ -54,3 +54,41 @@ export interface AuthContextType {
   logout: () => void
   checkAuth: () => void
 }
+
+// Toast notification types
+export type ToastType = 'success' | 'error' | 'info' | 'warning'
+
+export interface Toast {
+  id: string
+  type: ToastType
+  message: string
+  duration?: number
+}
+
+export interface ToastContextType {
+  toasts: Toast[]
+  addToast: (toast: Omit<Toast, 'id'>) => void
+  removeToast: (id: string) => void
+}
+
+// Error boundary types
+export interface ErrorBoundaryState {
+  hasError: boolean
+  error: Error | null
+}
+
+export interface ErrorBoundaryProps {
+  children: React.ReactNode
+  fallback?: React.ReactNode
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void
+}
+
+// Retry configuration types
+export interface RetryConfig {
+  maxRetries: number
+  delay: number
+  backoffMultiplier: number
+}
+
+// Online status type
+export type OnlineStatus = boolean
