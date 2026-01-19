@@ -93,6 +93,7 @@ export default function UserCard({ user, onClick, className = '' }: UserCardProp
             className="w-16 h-16 rounded-full object-cover"
             onError={() => setImageError(true)}
             aria-label={`${user.name}'s profile picture`}
+            unoptimized
           />
         )}
         <div className="ml-4 flex-1">
