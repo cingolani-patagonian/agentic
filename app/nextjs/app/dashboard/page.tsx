@@ -21,7 +21,7 @@ function DashboardContent() {
   const searchParams = useSearchParams()
   const { user, logout, isLoading } = useAuth()
   const { showError, showSuccess } = useToast()
-
+console.log(user)
   // User data state
   const [users, setUsers] = useState<User[]>([])
   const [filteredUsers, setFilteredUsers] = useState<User[]>([])

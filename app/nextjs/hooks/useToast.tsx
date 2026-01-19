@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useCallback } from 'react'
 import { ToastContext } from '@/contexts/ToastContext'
 import type { ToastType } from '@/types'
 
@@ -22,21 +22,21 @@ export function useToast(): UseToastReturn {
 
   const { addToast, removeToast } = context
 
-  const showSuccess = (message: string, duration?: number) => {
+  const showSuccess = useCallback((message: string, duration?: number) => {
     addToast({ type: 'success', message, duration })
-  }
+  }, [addToast])
 
-  const showError = (message: string, duration?: number) => {
+  const showError = useCallback((message: string, duration?: number) => {
     addToast({ type: 'error', message, duration })
-  }
+  }, [addToast])
 
-  const showInfo = (message: string, duration?: number) => {
+  const showInfo = useCallback((message: string, duration?: number) => {
     addToast({ type: 'info', message, duration })
-  }
+  }, [addToast])
 
-  const showWarning = (message: string, duration?: number) => {
+  const showWarning = useCallback((message: string, duration?: number) => {
     addToast({ type: 'warning', message, duration })
-  }
+  }, [addToast])
 
   return {
     showSuccess,
