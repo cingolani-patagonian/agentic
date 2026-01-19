@@ -209,3 +209,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When explaining autonomous AI development patterns and agent decision-making
     - When working with ARCHITECTURE.md or DEPLOYMENT.md files
     - When preparing documentation for challenge submissions or showcases
+
+- app_docs/feature-b742df28-avatar-loading-fix.md
+  - Conditions:
+    - When troubleshooting Next.js Image component with external image APIs
+    - When fixing 400 Bad Request errors for image loading
+    - When working with unoptimized images or bypassing Next.js image optimization
+    - When integrating dynamic image generation APIs (ui-avatars.com, DiceBear, etc.)
+    - When implementing avatar images in Next.js applications
+    - When dealing with Next.js image optimization incompatibilities
+    - When creating E2E tests for image loading validation
+    - When investigating remotePatterns configuration issues
