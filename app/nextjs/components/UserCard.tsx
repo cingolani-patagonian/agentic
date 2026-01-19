@@ -67,7 +67,7 @@ export default function UserCard({ user, onClick, className = '' }: UserCardProp
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow ${
+      className={`bg-white rounded-lg shadow-md p-4 sm:p-6 border border-transparent hover:shadow-2xl hover:scale-[1.02] hover:bg-gray-50 hover:border-indigo-500 transition-all duration-200 ease-in-out ${
         isClickable ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' : ''
       } ${className}`}
       onClick={isClickable ? handleClick : undefined}
