@@ -234,6 +234,18 @@ This prompt helps you determine what documentation you should read based on the 
     - When creating E2E tests for visual hover effects validation
     - When enhancing user card interactions on the dashboard
 
+- app_docs/feature-77a988ed-about-page.md
+  - Conditions:
+    - When working with the About page at /about route
+    - When implementing informational or marketing pages in Next.js
+    - When creating feature showcase sections with grid layouts
+    - When documenting project tech stack or architecture
+    - When implementing gradient backgrounds or highlighted content sections
+    - When creating public (non-authenticated) pages
+    - When working with responsive multi-column card layouts
+    - When documenting the ADW system or AI-driven development approach
+    - When implementing getting started sections with navigation links
+    - When troubleshooting About page content or layout issues
 - app_docs/feature-d54beab1-user-details-page.md
   - Conditions:
     - When working with user details page at /users/[id] route
