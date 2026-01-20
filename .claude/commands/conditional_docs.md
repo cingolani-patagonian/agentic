@@ -234,6 +234,18 @@ This prompt helps you determine what documentation you should read based on the 
     - When creating E2E tests for visual hover effects validation
     - When enhancing user card interactions on the dashboard
 
+- app_docs/feature-d54beab1-user-details-page.md
+  - Conditions:
+    - When working with user details page at /users/[id] route
+    - When implementing dynamic routes in Next.js with [id] parameters
+    - When adding click handlers to user cards for navigation to detail views
+    - When displaying comprehensive user information (profile, contact, organization)
+    - When implementing back navigation from detail pages to dashboard
+    - When working with shareable URL routes for user profiles
+    - When implementing avatar fallback functionality with user initials
+    - When formatting dates for user-friendly display (join date)
+    - When creating detail views for list items with authentication guards
+    - When troubleshooting user details page navigation or data display
 - app_docs/feature-a6dbe942-search-bar-label.md
   - Conditions:
     - When working with the SearchBar component styling or structure

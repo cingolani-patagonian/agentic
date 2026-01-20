@@ -157,6 +157,11 @@ console.log(user)
     setSelectedDepartment('All Departments')
   }
 
+  // User card click handler - navigate to user details page
+  const handleUserClick = (user: User) => {
+    router.push(`/users/${user.id}`)
+  }
+
   // Extract unique departments for filter
   const departments = Array.from(new Set(users.map((u) => u.department))).sort()
 
@@ -243,7 +248,7 @@ console.log(user)
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredUsers.map((userData) => (
-                <UserCard key={userData.id} user={userData} />
+                <UserCard key={userData.id} user={userData} onClick={handleUserClick} />
               ))}
             </div>
           </>
