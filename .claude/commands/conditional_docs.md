@@ -233,3 +233,15 @@ This prompt helps you determine what documentation you should read based on the 
     - When troubleshooting hover state performance or janky animations
     - When creating E2E tests for visual hover effects validation
     - When enhancing user card interactions on the dashboard
+
+- app_docs/feature-a6dbe942-search-bar-label.md
+  - Conditions:
+    - When working with the SearchBar component styling or structure
+    - When implementing form labels or label-input associations
+    - When aligning components with similar visual elements (filters, inputs)
+    - When adding visible labels to form inputs for accessibility
+    - When ensuring consistent label styling across form components
+    - When troubleshooting vertical alignment issues between filter components
+    - When implementing responsive layouts with labeled form controls
+    - When following accessibility best practices for form inputs
+    - When creating E2E tests for label visibility and alignment
