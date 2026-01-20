@@ -220,3 +220,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When dealing with Next.js image optimization incompatibilities
     - When creating E2E tests for image loading validation
     - When investigating remotePatterns configuration issues
+
+- app_docs/feature-f6170557-hover-effect-cards.md
+  - Conditions:
+    - When implementing hover effects or interactive states for UI components
+    - When working with UserCard component hover animations
+    - When adding visual feedback to cards, buttons, or interactive elements
+    - When implementing multi-property CSS transitions (shadow, scale, background, border)
+    - When working with Tailwind CSS hover utilities or transition classes
+    - When creating smooth animations with GPU-accelerated properties
+    - When implementing accessibility-compliant animations (prefers-reduced-motion)
+    - When troubleshooting hover state performance or janky animations
+    - When creating E2E tests for visual hover effects validation
+    - When enhancing user card interactions on the dashboard

@@ -3,10 +3,11 @@
 This is a minimal server implementation that will be extended in future issues.
 """
 import os
+
+import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 
 # Load environment variables
 load_dotenv()
