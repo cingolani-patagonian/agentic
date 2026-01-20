@@ -246,3 +246,26 @@ This prompt helps you determine what documentation you should read based on the 
     - When documenting the ADW system or AI-driven development approach
     - When implementing getting started sections with navigation links
     - When troubleshooting About page content or layout issues
+- app_docs/feature-d54beab1-user-details-page.md
+  - Conditions:
+    - When working with user details page at /users/[id] route
+    - When implementing dynamic routes in Next.js with [id] parameters
+    - When adding click handlers to user cards for navigation to detail views
+    - When displaying comprehensive user information (profile, contact, organization)
+    - When implementing back navigation from detail pages to dashboard
+    - When working with shareable URL routes for user profiles
+    - When implementing avatar fallback functionality with user initials
+    - When formatting dates for user-friendly display (join date)
+    - When creating detail views for list items with authentication guards
+    - When troubleshooting user details page navigation or data display
+- app_docs/feature-a6dbe942-search-bar-label.md
+  - Conditions:
+    - When working with the SearchBar component styling or structure
+    - When implementing form labels or label-input associations
+    - When aligning components with similar visual elements (filters, inputs)
+    - When adding visible labels to form inputs for accessibility
+    - When ensuring consistent label styling across form components
+    - When troubleshooting vertical alignment issues between filter components
+    - When implementing responsive layouts with labeled form controls
+    - When following accessibility best practices for form inputs
+    - When creating E2E tests for label visibility and alignment
