@@ -8,11 +8,11 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-sm text-gray-300">
-            © {currentYear} Mock User Dashboard
+            © {currentYear} User List
           </div>
 
           <div className="text-sm font-semibold">
-            Mock User Dashboard
+            User List
           </div>
 
           <div className="text-sm">
