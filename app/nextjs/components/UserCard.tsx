@@ -113,14 +113,14 @@ export default function UserCard({ user, onClick, className = '' }: UserCardProp
 
       <div className="space-y-2">
         <p className="text-sm text-gray-600">
-          <span className="font-medium text-gray-700">Role:</span> {user.role}
+          <span className="font-medium text-gray-700">Role:</span> <span className="font-bold">{user.role}</span>
         </p>
         <p className="text-sm text-gray-600">
-          <span className="font-medium text-gray-700">Department:</span> {user.department}
+          <span className="font-medium text-gray-700">Department:</span> <span className="font-bold">{user.department}</span>
         </p>
         {user.location && (
           <p className="text-sm text-gray-600">
-            <span className="font-medium text-gray-700">Location:</span> {user.location}
+            <span className="font-medium text-gray-700">Location:</span> <span className="font-bold">{user.location}</span>
           </p>
         )}
         <a
