@@ -8,7 +8,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { OfflineBanner } from '@/components/OfflineBanner'
 
 export const metadata: Metadata = {
-  title: 'Mock User Dashboard',
+  title: 'User List',
   description: 'A Next.js application with responsive navigation and user management',
 }
 
@@ -25,7 +25,7 @@ export default function RootLayout({
             <ErrorBoundary>
               <OfflineBanner />
               <Navigation />
-              <main className="flex-grow">
+              <main className="flex-grow pt-16">
                 {children}
               </main>
               <Footer />
