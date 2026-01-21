@@ -282,3 +282,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with Navigation component fixed positioning
     - When ensuring responsive behavior works with fixed headers
     - When creating E2E tests for fixed header behavior validation
+
+- app_docs/feature-1faaeccf-bold-user-card-fields.md
+  - Conditions:
+    - When working with font styling or visual hierarchy in user cards
+    - When implementing bold or font-weight changes to text fields
+    - When enhancing text prominence in the UserCard component
+    - When styling role, department, or location fields
+    - When working with Tailwind font utility classes (font-bold, font-medium)
+    - When improving scannability of key user attributes
+    - When troubleshooting text styling or visual hierarchy issues
+    - When creating E2E tests for text styling validation
