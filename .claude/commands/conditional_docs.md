@@ -269,3 +269,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing responsive layouts with labeled form controls
     - When following accessibility best practices for form inputs
     - When creating E2E tests for label visibility and alignment
+
+- app_docs/feature-4dbe98e6-fixed-header-user-list.md
+  - Conditions:
+    - When working with fixed header or sticky navigation components
+    - When implementing position: fixed CSS layouts
+    - When adding z-index layering for navigation elements
+    - When adjusting content padding to account for fixed headers
+    - When rebranding application names or titles across components
+    - When implementing scroll behavior with fixed navigation
+    - When troubleshooting header positioning or content overlap issues
+    - When working with Navigation component fixed positioning
+    - When ensuring responsive behavior works with fixed headers
+    - When creating E2E tests for fixed header behavior validation
