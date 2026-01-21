@@ -293,3 +293,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When improving scannability of key user attributes
     - When troubleshooting text styling or visual hierarchy issues
     - When creating E2E tests for text styling validation
+
+- app_docs/feature-be42571c-back-button-right.md
+  - Conditions:
+    - When working with button positioning or layout alignment in headers
+    - When implementing flexbox justify-between or justify-end layouts
+    - When moving elements from left to right side of containers
+    - When shortening button text or improving UI conciseness
+    - When working with back navigation buttons on detail pages
+    - When reordering header elements for better visual hierarchy
+    - When implementing responsive button positioning
+    - When troubleshooting header layout or button alignment issues
