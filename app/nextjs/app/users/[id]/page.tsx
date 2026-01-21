@@ -154,7 +154,8 @@ export default function UserDetailsPage() {
       {/* Header with back button */}
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">User Details</h1>
             <button
               onClick={handleBack}
               className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
@@ -174,9 +175,8 @@ export default function UserDetailsPage() {
                   d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 />
               </svg>
-              Back to Dashboard
+              Back
             </button>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">User Details</h1>
           </div>
         </div>
       </header>
