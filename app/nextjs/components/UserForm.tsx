@@ -141,7 +141,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 placeholder:text-gray-500 ${
             errors.name ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="John Doe"
@@ -160,7 +160,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 placeholder:text-gray-500 ${
             errors.email ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="john.doe@company.com"
@@ -179,7 +179,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="username"
           value={formData.username}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 placeholder:text-gray-500 ${
             errors.username ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="johndoe"
@@ -197,7 +197,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="role"
           value={formData.role}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 ${
             errors.role ? 'border-red-500' : 'border-gray-300'
           }`}
         >
@@ -221,7 +221,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="department"
           value={formData.department}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 ${
             errors.department ? 'border-red-500' : 'border-gray-300'
           }`}
         >
@@ -245,7 +245,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="location"
           value={formData.location}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 ${
             errors.location ? 'border-red-500' : 'border-gray-300'
           }`}
         >
@@ -269,7 +269,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 ${
             errors.status ? 'border-red-500' : 'border-gray-300'
           }`}
         >
@@ -293,7 +293,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           name="joinDate"
           value={formData.joinDate}
           onChange={handleChange}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 ${
             errors.joinDate ? 'border-red-500' : 'border-gray-300'
           }`}
         />
@@ -313,7 +313,7 @@ export default function UserForm({ initialData, mode, onSubmit, onCancel, isSubm
           onChange={handleChange}
           rows={4}
           maxLength={500}
-          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900 placeholder:text-gray-500 ${
             errors.bio ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="Brief description about the user..."
