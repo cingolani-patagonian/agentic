@@ -15,7 +15,13 @@
  */
 
 import { User, ApiResponse } from '@/types'
-import { mockUsers, getUserById as getDbUserById, getUsersByDepartment as getDbUsersByDepartment } from '@/lib/mockDb'
+import {
+  mockUsers,
+  getUserById as getDbUserById,
+  getUsersByDepartment as getDbUsersByDepartment,
+  createUser as dbCreateUser,
+  updateUser as dbUpdateUser
+} from '@/lib/mockDb'
 import { withRetry } from '@/lib/retryLogic'
 
 /**
@@ -321,6 +327,114 @@ export async function getUsersByDepartment(department: string): Promise<ApiRespo
 
   if (!result.success) {
     return createErrorResponse(result.error?.message || 'Failed to fetch users by department') as any
+  }
+
+  return result.data!
+}
+
+/**
+ * Create a new user
+ *
+ * @param userData - User data without ID (ID will be auto-generated)
+ * @returns Promise resolving to the created user or error if validation fails
+ *
+ * @example
+ * ```typescript
+ * const response = await createUser({
+ *   name: 'John Doe',
+ *   email: 'john.doe@company.com',
+ *   role: 'Full Stack Developer',
+ *   department: 'Engineering',
+ *   location: 'New York',
+ *   bio: 'Passionate developer...',
+ *   joinDate: '2024-01-15',
+ *   status: 'active'
+ * })
+ * if (response.success) {
+ *   console.log(response.data.id) // "usr_abc123def456"
+ * }
+ * ```
+ */
+export async function createUser(userData: Omit<User, 'id' | 'avatar'>): Promise<ApiResponse<User> & { timestamp: string }> {
+  // Validate required fields early (non-retryable)
+  if (!userData.name || userData.name.trim() === '') {
+    return createErrorResponse('Name is required')
+  }
+  if (!userData.email || userData.email.trim() === '') {
+    return createErrorResponse('Email is required')
+  }
+  if (!userData.role || userData.role.trim() === '') {
+    return createErrorResponse('Role is required')
+  }
+  if (!userData.department || userData.department.trim() === '') {
+    return createErrorResponse('Department is required')
+  }
+  if (!userData.location || userData.location.trim() === '') {
+    return createErrorResponse('Location is required')
+  }
+
+  const result = await withRetry(async () => {
+    // Simulate API delay
+    await simulateDelay()
+
+    // Create user in mock database
+    const newUser = dbCreateUser(userData)
+
+    return createSuccessResponse(newUser)
+  })
+
+  if (!result.success) {
+    return createErrorResponse(result.error?.message || 'Failed to create user')
+  }
+
+  return result.data!
+}
+
+/**
+ * Update an existing user
+ *
+ * @param id - The unique user identifier
+ * @param updates - Partial user object with fields to update
+ * @returns Promise resolving to the updated user or error if not found
+ *
+ * @example
+ * ```typescript
+ * const response = await updateUser('usr_1a2b3c4d5e6f', {
+ *   role: 'Senior Engineering Manager',
+ *   location: 'Austin'
+ * })
+ * if (response.success) {
+ *   console.log(response.data.role) // "Senior Engineering Manager"
+ * } else {
+ *   console.error(response.error) // "User not found with ID: ..."
+ * }
+ * ```
+ */
+export async function updateUser(id: string, updates: Partial<Omit<User, 'id' | 'avatar'>>): Promise<ApiResponse<User> & { timestamp: string }> {
+  // Validate input early (non-retryable)
+  if (!id || id.trim() === '') {
+    return createErrorResponse('User ID is required')
+  }
+  if (!updates || Object.keys(updates).length === 0) {
+    return createErrorResponse('No updates provided')
+  }
+
+  const result = await withRetry(async () => {
+    // Simulate API delay
+    await simulateDelay()
+
+    // Update user in mock database
+    const updatedUser = dbUpdateUser(id, updates)
+
+    if (!updatedUser) {
+      throw new Error(`User not found with ID: ${id}`)
+    }
+
+    return createSuccessResponse(updatedUser)
+  })
+
+  if (!result.success) {
+    return createErrorResponse(result.error?.message || 'Failed to update user')
   }
 
   return result.data!

@@ -304,3 +304,18 @@ This prompt helps you determine what documentation you should read based on the 
     - When reordering header elements for better visual hierarchy
     - When implementing responsive button positioning
     - When troubleshooting header layout or button alignment issues
+
+- app_docs/feature-82ffb118-admin-user-management.md
+  - Conditions:
+    - When implementing admin-only features or role-based access control
+    - When creating or editing user management functionality
+    - When working with user creation or user editing forms
+    - When implementing AdminGuard component or route protection
+    - When working with form validation utilities (lib/validation.ts)
+    - When adding CRUD operations to the mock database (createUser, updateUser)
+    - When extending the API service layer with user management operations
+    - When implementing reusable form components with create/edit modes
+    - When adding admin-only buttons or UI elements visible to specific roles
+    - When working with user form fields (name, email, role, department, location, bio, joinDate, status)
+    - When troubleshooting admin access control or permission checks
+    - When migrating from mock user management to real backend user APIs

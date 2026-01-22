@@ -14,6 +14,10 @@ interface UserCardProps {
   onClick?: (user: User) => void;
   /** Optional additional CSS classes for custom styling */
   className?: string;
+  /** Optional flag to show edit button for admin users */
+  showEditButton?: boolean;
+  /** Optional callback when edit button is clicked */
+  onEdit?: (user: User) => void;
 }
 
 /**
@@ -30,7 +34,7 @@ interface UserCardProps {
  * - Responsive design for mobile, tablet, and desktop
  * - Smooth hover effects
  */
-export default function UserCard({ user, onClick, className = '' }: UserCardProps) {
+export default function UserCard({ user, onClick, className = '', showEditButton = false, onEdit }: UserCardProps) {
   const [imageError, setImageError] = useState(false);
 
   // Extract initials from user name for fallback
@@ -63,11 +67,19 @@ export default function UserCard({ user, onClick, className = '' }: UserCardProp
     e.stopPropagation();
   };
 
+  // Handle edit button click
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onEdit) {
+      onEdit(user);
+    }
+  };
+
   const isClickable = !!onClick;
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md p-4 sm:p-6 border border-transparent hover:shadow-2xl hover:scale-[1.02] hover:bg-gray-50 hover:border-indigo-500 transition-all duration-200 ease-in-out ${
+      className={`relative bg-white rounded-lg shadow-md p-4 sm:p-6 border border-transparent hover:shadow-2xl hover:scale-[1.02] hover:bg-gray-50 hover:border-indigo-500 transition-all duration-200 ease-in-out ${
         isClickable ? 'cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' : ''
       } ${className}`}
       onClick={isClickable ? handleClick : undefined}
@@ -76,6 +88,30 @@ export default function UserCard({ user, onClick, className = '' }: UserCardProp
       role="article"
       aria-label={`User profile card for ${user.name}`}
     >
+      {/* Edit Button */}
+      {showEditButton && onEdit && (
+        <button
+          onClick={handleEditClick}
+          className="absolute top-2 right-2 p-2 rounded-full bg-white shadow-md hover:bg-indigo-50 hover:shadow-lg transition-all duration-200 group"
+          aria-label={`Edit ${user.name}'s profile`}
+          title="Edit user"
+        >
+          <svg
+            className="w-4 h-4 text-gray-600 group-hover:text-indigo-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+            />
+          </svg>
+        </button>
+      )}
+
       <div className="flex items-center mb-4">
         {imageError ? (
           <div

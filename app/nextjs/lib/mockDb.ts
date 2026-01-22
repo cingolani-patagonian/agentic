@@ -351,3 +351,94 @@ export function getActiveUsers(): User[] {
 export function getUsersByLocation(location: string): User[] {
   return mockUsers.filter(user => user.location === location)
 }
+
+/**
+ * Generate a unique user ID with 'usr_' prefix
+ * @returns A unique 12-character random hex ID with 'usr_' prefix
+ */
+function generateUserId(): string {
+  const randomHex = Array.from({ length: 12 }, () =>
+    Math.floor(Math.random() * 16).toString(16)
+  ).join('')
+  return `usr_${randomHex}`
+}
+
+/**
+ * Generate avatar URL using UI Avatars service
+ * @param name - User's full name
+ * @returns Avatar URL
+ */
+function generateAvatarUrl(name: string): string {
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random`
+}
+
+/**
+ * Create a new user
+ * @param userData - User data without ID (ID will be generated)
+ * @returns The created user object
+ * @throws Error if required fields are missing
+ */
+export function createUser(userData: Omit<User, 'id' | 'avatar'>): User {
+  // Validate required fields
+  if (!userData.name || !userData.email || !userData.role || !userData.department || !userData.location) {
+    throw new Error('Missing required fields: name, email, role, department, and location are required')
+  }
+
+  // Generate unique ID and avatar
+  const newUser: User = {
+    ...userData,
+    id: generateUserId(),
+    avatar: generateAvatarUrl(userData.name)
+  }
+
+  // Add to mockUsers array
+  mockUsers.push(newUser)
+
+  return newUser
+}
+
+/**
+ * Update an existing user
+ * @param id - User ID to update
+ * @param updates - Partial user object with fields to update
+ * @returns The updated user object or null if not found
+ */
+export function updateUser(id: string, updates: Partial<Omit<User, 'id'>>): User | null {
+  const userIndex = mockUsers.findIndex(user => user.id === id)
+
+  if (userIndex === -1) {
+    return null
+  }
+
+  // If name is being updated, regenerate avatar
+  if (updates.name && updates.name !== mockUsers[userIndex].name) {
+    updates.avatar = generateAvatarUrl(updates.name)
+  }
+
+  // Update user (preserving ID)
+  const updatedUser: User = {
+    ...mockUsers[userIndex],
+    ...updates,
+    id // Ensure ID cannot be changed
+  }
+
+  mockUsers[userIndex] = updatedUser
+
+  return updatedUser
+}
+
+/**
+ * Delete a user by ID
+ * @param id - User ID to delete
+ * @returns True if user was deleted, false if not found
+ */
+export function deleteUser(id: string): boolean {
+  const userIndex = mockUsers.findIndex(user => user.id === id)
+
+  if (userIndex === -1) {
+    return false
+  }
+
+  mockUsers.splice(userIndex, 1)
+  return true
+}

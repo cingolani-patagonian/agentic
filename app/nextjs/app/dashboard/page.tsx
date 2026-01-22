@@ -162,6 +162,11 @@ console.log(user)
     router.push(`/users/${user.id}`)
   }
 
+  // User card edit handler - navigate to edit page
+  const handleUserEdit = (user: User) => {
+    router.push(`/admin/users/${user.id}/edit`)
+  }
+
   // Extract unique departments for filter
   const departments = Array.from(new Set(users.map((u) => u.department))).sort()
 
@@ -187,12 +192,25 @@ console.log(user)
                 Logged in as <span className="font-medium">{user.username}</span> ({user.role})
               </p>
             </div>
-            <button
-              onClick={handleLogout}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
-            >
-              Logout
-            </button>
+            <div className="flex gap-3">
+              {user.role === 'admin' && (
+                <button
+                  onClick={() => router.push('/admin/users/new')}
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Add New User
+                </button>
+              )}
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -248,7 +266,13 @@ console.log(user)
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredUsers.map((userData) => (
-                <UserCard key={userData.id} user={userData} onClick={handleUserClick} />
+                <UserCard
+                  key={userData.id}
+                  user={userData}
+                  onClick={handleUserClick}
+                  showEditButton={user?.role === 'admin'}
+                  onEdit={handleUserEdit}
+                />
               ))}
             </div>
           </>
