@@ -343,3 +343,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When creating E2E tests for form pre-population validation
     - When troubleshooting form initialization or field pre-population issues
     - When ensuring all form field types (text, dropdown, date, textarea) display existing values correctly
+
+- app_docs/bug-7ba88138-black-text-edit-form.md
+  - Conditions:
+    - When working with UserForm component text visibility or styling
+    - When implementing text color changes for form input fields
+    - When troubleshooting text readability or contrast issues in forms
+    - When ensuring WCAG accessibility compliance for form text
+    - When styling input, select, or textarea elements with dark text colors
+    - When working with placeholder text styling in forms
+    - When fixing text visibility issues in user management forms
+    - When creating E2E tests for form text visibility validation
