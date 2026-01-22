@@ -330,3 +330,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with component height consistency across form elements
     - When styling input or select elements with Tailwind text color utilities
     - When creating E2E tests for text visibility validation
+
+- app_docs/feature-6d548c35-prepopulate-edit-form.md
+  - Conditions:
+    - When implementing form pre-population functionality
+    - When working with edit forms that need to load existing data
+    - When using UserForm component with initialData prop
+    - When fetching user data by ID for editing purposes
+    - When implementing loading states during data fetching
+    - When handling error scenarios for missing or invalid user IDs
+    - When working with the /admin/users/[id]/edit route
+    - When creating E2E tests for form pre-population validation
+    - When troubleshooting form initialization or field pre-population issues
+    - When ensuring all form field types (text, dropdown, date, textarea) display existing values correctly
