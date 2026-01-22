@@ -319,3 +319,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with user form fields (name, email, role, department, location, bio, joinDate, status)
     - When troubleshooting admin access control or permission checks
     - When migrating from mock user management to real backend user APIs
+
+- app_docs/feature-bfb6956a-search-dropdown-styling.md
+  - Conditions:
+    - When working with SearchBar or DepartmentFilter component styling
+    - When implementing text color changes for form inputs or select elements
+    - When ensuring WCAG contrast compliance for text visibility
+    - When implementing placeholder text styling
+    - When troubleshooting text readability or visibility issues in form components
+    - When working with component height consistency across form elements
+    - When styling input or select elements with Tailwind text color utilities
+    - When creating E2E tests for text visibility validation
