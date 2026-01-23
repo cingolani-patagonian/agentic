@@ -149,7 +149,7 @@ def classify_issue(
     if issue_command == "0":
         return None, f"No command selected: {response.output}"
 
-    if issue_command not in ["/chore", "/bug", "/feature"]:
+    if issue_command not in ["/chore", "/bug", "/feature", "/patch"]:
         return None, f"Invalid command selected: {response.output}"
 
     return issue_command, None  # type: ignore

@@ -25,30 +25,29 @@ ADW_BOT_IDENTIFIER = "[ADW-AGENTS]"
 
 
 def get_github_env() -> Optional[dict]:
-    """Get environment with GitHub token set up. Returns None if no GITHUB_PAT.
-    
+    """Get environment with GitHub token set up. Returns None if no GITHUB_PAT or GH_TOKEN.
+
     Subprocess env behavior:
     - env=None → Inherits parent's environment (default)
     - env={} → Empty environment (no variables)
     - env=custom_dict → Only uses specified variables
-    
+
     So this will work with gh authentication:
     # These are equivalent:
     result = subprocess.run(cmd, capture_output=True, text=True)
     result = subprocess.run(cmd, capture_output=True, text=True, env=None)
-    
+
     But this will NOT work (no PATH, no auth):
     result = subprocess.run(cmd, capture_output=True, text=True, env={})
     """
-    github_pat = os.getenv("GITHUB_PAT")
+    github_pat = os.getenv("GITHUB_PAT") or os.getenv("GH_TOKEN")
     if not github_pat:
         return None
-    
-    # Only create minimal env with GitHub token
-    env = {
-        "GH_TOKEN": github_pat,
-        "PATH": os.environ.get("PATH", ""),
-    }
+
+    # Copy entire parent environment and set GitHub token
+    # This ensures gh CLI has access to HOME, PATH, and other needed variables
+    env = os.environ.copy()
+    env["GH_TOKEN"] = github_pat
     return env
 
 
